@@ -1,0 +1,28 @@
+[
+        {
+        "dataType": "number",
+        "label": "Protocol Number",
+        "exportLabel": "Protocol Number",
+        "value": "12345678"
+
+        },
+        {
+        "dataType": "date",
+        "label": "SAE onset date",
+        "exportLabel": "SAE onset date",
+        "value": "12/10/2018"
+
+        },
+        {
+        "dataType": "select",
+        "exportLabel": "Sex",
+        "tableColumns": [],
+        "options": [{
+            "option": "F"
+        }, {
+            "option": "M"
+        }],
+        "value": "F"
+        }
+    
+]

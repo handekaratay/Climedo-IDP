@@ -1,0 +1,63 @@
+[
+        {
+        "dataType": "number",
+        "label": "Hospital UPN",
+        "exportLabel": "Hospital UPN",
+        "description": "",
+        "_id": "5bd9b716d2cfd100128f502b",
+        "tableColumns": [],
+        "options": [],
+        "value": "6655"
+
+        },
+        {
+        "dataType": "date",
+        "label": "Date of this report",
+        "exportLabel": "Date of this report",
+        "description": "Tag 0, Datum der Infusion des ersten Produktes im Rahmen der SZT",
+        "_id": "5bd9b716d2cfd100128f5029",
+        "tableColumns": [],
+        "options": [],
+        "value": "12/10/2018"
+
+        },
+    {
+    "dataType": "select",
+        "exportLabel": "Patient following national / international study / trial",
+        "_id": "5bd9b716d2cfd100128f24029",
+        "tableColumns": [],
+        "options": [{
+            "option": "No"
+        }, {
+            "option": "Yes"
+        }],
+        "value": "No"
+
+    },
+ 
+
+    
+        {
+        "dataType": "text",
+        "label": "Email",
+        "exportLabel": "Email",
+        "description": "",
+        "_id": "5bd9b716d2cfd100128f5028",
+        "tableColumns": [],
+        "options": [],
+        "value": "someone@gmail.com"
+        },
+        {
+        "exportLabel": "Sex",
+        "dataType": "select", 
+        "options": [{
+            "option": "Male"
+        }, {
+            "option": "Female"
+        }],
+        "value": "Male"
+
+    }
+        
+        
+]
