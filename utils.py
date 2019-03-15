@@ -285,7 +285,7 @@ class PDF:
         """
 
         for x, y, val in self.changes:
-            command = "cpdf -add-text %s -color 'red' -pos-left '%s %s' %s %s -o %s" % (str(val), str(x), str(y), self.input_filename, str(self.page_num+1), self.input_filename)
+            command = "cpdf -add-text '%s' -color 'red' -pos-left '%s %s' %s %s -o %s" % (str(val), str(x), str(y), self.input_filename, str(self.page_num+1), self.input_filename)
             print("Executing:",command)
             os.system(command)
 
