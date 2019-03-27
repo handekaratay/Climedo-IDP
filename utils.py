@@ -85,7 +85,8 @@ class PDF:
 
     def get_writeCoords(self, val):
         """
-        Get the writing coordinates
+        Get the writing coordinates.
+        Removes trailing dots for the documents to write to the right location.
 
         :param val: Pandas series, export label from df
         :return: x and y locations (where to write)
@@ -108,7 +109,7 @@ class PDF:
 
     def write_txt(self, exportLabel, value):
         """
-        Write normal text value
+        Write normal text value.
 
         :param exportLabel: Comes from the JSON, what to fill (ex: "UPN Number")
         :param value: Value to be written  (ex: "325241")
@@ -156,7 +157,11 @@ class PDF:
 
     def check_dist(self, words_df, exportLabel, val):
         """
-        If there are multiple values, returns the index of the closest one
+        If there are more than one of the same data value the shortest distance between the
+        exportLabel and the data value to be checked is computed. 
+
+        Returns the index of the closest one.
+
 
         :param words_df: Dataframe to check within
         :param exportLabel: Comes from the JSON, what to fill
@@ -169,11 +174,14 @@ class PDF:
         exp_rect = (lookup_windowAround(exp))
         print(exp_rect)
 
+        # creates a look up window for all the found val values and adds them to a list
         for x, i in enumerate(val):
             # print(i)
             rect_val = (lookup_windowAround(i))
-            rect_val_list.insert(x, rect_val)
+            rect_val_list.insert(x, rect_val) 
 
+        # in this list the minimum distance is calculated between the exportLabel and the found val values
+        # the index for the closest distance to the export label is outputed so that the correct checkbox is checked
         min_dist = 99999
         for i, rect_val in enumerate(rect_val_list):
             a = np.array((exp_rect['x0'], exp_rect['top']))
@@ -188,7 +196,12 @@ class PDF:
         
     def selectable_checkbox(self, rects, value, exportLabel):
         """
-        Called from write_checkbox()
+        Called from write_checkbox().
+        The algorithm searches for the data value to be checked in the PDF.
+        If there are more than one of the same data value the shortest distance between the “exportLabel” and the data value
+        to be checked is computed with the check_dist() function.
+        At the end a mark ‘X’ is written on the corresponding data value accordingly.
+
 
         :param rects:
         :param value:
@@ -205,9 +218,9 @@ class PDF:
             val = self.single_df[self.single_df['text'] == value].values
 
 
-        if (len(val) > 1):  # if there are 2 same values
-            index = self.check_dist(self.words_df, exportLabel, val)
-            aim_rect = lookup_windowAround(index)  ## check here if close to exportlabel
+        if (len(val) > 1):  # if there are 2 same values compute minimum distance 
+            index = self.check_dist(self.words_df, exportLabel, val) ## check here if close to exportlabel
+            aim_rect = lookup_windowAround(index)  
             aim_rects.append(aim_rect)
 
         else:
@@ -215,6 +228,7 @@ class PDF:
             aim_rect = lookup_windowAround(index)
             aim_rects.append(aim_rect)
 
+        # Find the coordinates to where to mark the ‘X’ 
         for aim_rect in aim_rects:
 
             if (v['text'].values[0] == value):
@@ -362,7 +376,7 @@ def combine(obj, attr, x_tolerance=3, y_tolerance=3, keep_blank_chars=False):
 
 def lookup_windowAround(bbox):
     """
-    Returns a bigger rectange around given bbox
+    Returns a bigger rectangle around given bbox coordinates
 
     :param bbox:
     :return: rect_around
